@@ -1,0 +1,59 @@
+# Podstawowa konfiguracja
+title: PreBoot.io
+description: Build SaaS Apps Faster with Java Spring Boot
+url: https://preboot.io
+baseurl: ""
+permalink: pretty
+
+# Metadane
+author:
+  name: PreBoot Team
+  email: info@preboot.io
+
+# Ustawienia GitHub Pages
+github:
+  is_project_page: true
+  repository_url: https://github.com/preboot/prebootkit
+
+# Ustawienia Markdown
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
+
+# Wykluczenia
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .gitignore
+  - README.md
+
+# Kolekcje
+collections:
+  docs:
+    output: true
+    permalink: /docs/:path/
+
+# Domyślne ustawienia Front Matter
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+  - scope:
+      path: "_posts"
+    values:
+      layout: "post"
+  - scope:
+      path: "_docs"
+    values:
+      layout: "documentation"
