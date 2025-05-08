@@ -22,7 +22,7 @@
   }
   
   .post-item-header h2 a {
-    color: var(--text-dark);
+    color: var(--text-light);
     text-decoration: none;
   }
   
@@ -37,6 +37,7 @@
     margin-bottom: 15px;
     font-size: 0.9rem;
     color: #6b7280;
+    justify-content: center;
   }
   
   .post-date, .post-author, .post-categories {
