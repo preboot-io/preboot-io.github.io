@@ -1,793 +1,154 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Preboot — Build SaaS Apps Faster</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <style>
-    :root {
-      --primary-dark: #0A192F;
-      --primary-light: #112240;
-      --accent: #64ffda;
-      --accent-hover: #52e0c4;
-      --accent-bg: rgba(100, 255, 218, 0.15);
-      --text-light: #ffffff;
-      --text-dark: #0A192F;
-      --text-gray: #4a5568;
-      --bg-light: #ffffff;
-      --bg-card: #f3f4f6;
-      --bg-step: #f9fafb;
-    }
-    
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: var(--bg-light);
-      color: var(--text-dark);
-      line-height: 1.6;
-    }
-    
-    header {
-      background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
-      color: var(--text-light);
-      padding: 100px 20px 80px;
-      text-align: center;
-      animation: fadeIn 2s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    header::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2364ffda' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      opacity: 0.1;
-    }
-    
-    .logo {
-      font-size: 2rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 10px;
-    }
-    
-    .logo-icon {
-      background: var(--accent);
-      color: var(--primary-dark);
-      width: 40px;
-      height: 40px;
-      border-radius: 8px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 12px;
-      font-weight: bold;
-    }
-    
-    header h1 {
-      margin: 0;
-      font-size: 3.5rem;
-      font-weight: 700;
-    }
-    
-    header p {
-      margin: 20px auto;
-      font-size: 1.5rem;
-      color: var(--accent);
-      max-width: 800px;
-    }
-    
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: rgba(10, 25, 47, 0.95);
-      backdrop-filter: blur(10px);
-      z-index: 1000;
-      padding: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: all 0.3s ease;
-    }
-    
-    nav.scrolled {
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-      padding: 15px 20px;
-    }
-    
-    .nav-logo {
-      color: var(--text-light);
-      font-weight: bold;
-      font-size: 1.3rem;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-    }
-    
-    .nav-logo span {
-      background: var(--accent);
-      color: var(--primary-dark);
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 8px;
-      font-weight: bold;
-    }
-    
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-    
-    nav a {
-      color: var(--text-light);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 1rem;
-      transition: color 0.2s ease;
-      display: flex;
-      align-items: center;
-    }
-    
-    nav a:hover {
-      color: var(--accent);
-    }
-    
-    .github-link {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 8px 15px;
-      border-radius: 6px;
-      transition: background 0.2s ease;
-    }
-    
-    .github-link:hover {
-      background: rgba(255, 255, 255, 0.15);
-    }
-    
-    section {
-      padding: 80px 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
-    
-    h2 {
-      font-size: 2.2rem;
-      text-align: center;
-      margin-bottom: 20px;
-      color: var(--text-dark);
-    }
-    
-    .section-description {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto 50px;
-      color: #4a5568;
-      font-size: 1.1rem;
-    }
-    
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-    }
-    
-    .feature-card {
-      background: #f8f9fa;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      border: 1px solid #e9ecef;
-    }
-    
-    .feature-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-    }
-    
-    .feature-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-    
-    .feature-icon {
-      font-size: 2rem;
-      color: var(--primary-dark);
-      background: var(--accent-bg);
-      width: 60px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 12px;
-      margin-right: 15px;
-      flex-shrink: 0;
-    }
-    
-    .feature-card strong {
-      display: block;
-      font-size: 1.3rem;
-      color: var(--text-dark);
-    }
-    
-    .feature-card p {
-      color: #4a5568;
-      flex-grow: 1;
-    }
-    
-    .how-it-works {
-      background: #f9fafb;
-    }
-    
-    .steps {
-      max-width: 800px;
-      margin: auto;
-    }
-    
-    .step {
-      display: flex;
-      margin-bottom: 40px;
-      position: relative;
-    }
-    
-    .step:last-child {
-      margin-bottom: 0;
-    }
-    
-    .step-number {
-      flex-shrink: 0;
-      width: 50px;
-      height: 50px;
-      background: var(--primary-dark);
-      color: var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-right: 25px;
-      position: relative;
-      z-index: 2;
-    }
-    
-    .step-content {
-      background: white;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      flex-grow: 1;
-    }
-    
-    .step-title {
-      font-size: 1.3rem;
-      margin-bottom: 10px;
-      color: var(--text-dark);
-    }
-    
-    .step-description {
-      color: #4a5568;
-    }
-    
-    .step:not(:last-child)::after {
-      content: "";
-      position: absolute;
-      top: 50px;
-      left: 25px;
-      width: 1px;
-      height: calc(100% - 30px);
-      background: #e2e8f0;
-      z-index: 1;
-    }
-    
-    .code-example {
-      margin: 30px auto;
-      max-width: 800px;
-    }
-    
-    .code-tabs {
-      display: flex;
-      border-bottom: 1px solid #e2e8f0;
-    }
-    
-    .code-tab {
-      padding: 10px 20px;
-      cursor: pointer;
-      background: transparent;
-      border: none;
-      border-bottom: 2px solid transparent;
-      font-family: 'Inter', sans-serif;
-      font-weight: 500;
-    }
-    
-    .code-tab.active {
-      border-bottom-color: var(--accent);
-      color: var(--primary-dark);
-    }
-    
-    .code-panel {
-      background: #1a1a1a;
-      border-radius: 0 0 5px 5px;
-      overflow: hidden;
-    }
-    
-    .code-content {
-      display: none;
-      padding: 20px;
-      overflow-x: auto;
-    }
-    
-    .code-content.active {
-      display: block;
-    }
-    
-    pre {
-      margin: 0;
-      font-family: 'Fira Code', 'JetBrains Mono', monospace;
-      font-size: 0.9rem;
-      line-height: 1.5;
-      color: #f8f8f2;
-    }
-    
-    .cta-section {
-      text-align: center;
-      padding: 80px 20px;
-      background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
-      color: var(--text-light);
-      position: relative;
-    }
-    
-    .cta-section::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2364ffda' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      opacity: 0.1;
-    }
-    
-    .cta-content {
-      position: relative;
-      z-index: 1;
-    }
-    
-    .cta-section h2 {
-      color: var(--text-light);
-      margin-bottom: 30px;
-    }
-    
-    .cta-description {
-      max-width: 600px;
-      margin: 0 auto 40px;
-      font-size: 1.1rem;
-      opacity: 0.9;
-    }
-    
-    .cta-buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-    
-    .cta-buttons a {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 15px 30px;
-      font-weight: 600;
-      text-decoration: none;
-      border-radius: 6px;
-      transition: all 0.3s ease;
-    }
-    
-    .primary-btn {
-      background: var(--accent);
-      color: var(--primary-dark);
-    }
-    
-    .primary-btn:hover {
-      background: var(--accent-hover);
-      transform: translateY(-2px);
-    }
-    
-    .secondary-btn {
-      background: rgba(255, 255, 255, 0.1);
-      color: var(--text-light);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    
-    .secondary-btn:hover {
-      background: rgba(255, 255, 255, 0.15);
-      transform: translateY(-2px);
-    }
-    
-    footer {
-      background: #f1f1f1;
-      padding: 40px 20px;
-      color: #555;
-    }
-    
-    .footer-content {
-      max-width: 1200px;
-      margin: auto;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 40px;
-    }
-    
-    .footer-logo {
-      margin-bottom: 15px;
-      font-weight: bold;
-      font-size: 1.2rem;
-      color: var(--text-dark);
-      display: flex;
-      align-items: center;
-    }
-    
-    .footer-logo span {
-      background: var(--primary-dark);
-      color: var(--accent);
-      width: 24px;
-      height: 24px;
-      border-radius: 4px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 8px;
-      font-weight: bold;
-      font-size: 0.9rem;
-    }
-    
-    .footer-col {
-      flex: 1;
-      min-width: 200px;
-    }
-    
-    .footer-heading {
-      font-weight: 600;
-      margin-bottom: 15px;
-      color: var(--text-dark);
-    }
-    
-    .footer-links {
-      list-style: none;
-    }
-    
-    .footer-links li {
-      margin-bottom: 8px;
-    }
-    
-    .footer-links a {
-      color: #555;
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-    
-    .footer-links a:hover {
-      color: var(--primary-dark);
-    }
-    
-    .social-links {
-      display: flex;
-      gap: 10px;
-      margin-top: 15px;
-    }
-    
-    .social-links a {
-      width: 36px;
-      height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #e5e7eb;
-      color: #555;
-      border-radius: 50%;
-      transition: all 0.2s ease;
-    }
-    
-    .social-links a:hover {
-      background: var(--primary-dark);
-      color: var(--text-light);
-    }
-    
-    .copyright {
-      text-align: center;
-      padding-top: 30px;
-      margin-top: 30px;
-      border-top: 1px solid #e5e7eb;
-      font-size: 0.9rem;
-    }
-    
-    .mobile-menu-btn {
-      display: none;
-      background: transparent;
-      border: none;
-      color: var(--text-light);
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    @media (max-width: 768px) {
-      header h1 {
-        font-size: 2.5rem;
-      }
-      
-      header p {
-        font-size: 1.2rem;
-      }
-      
-      .mobile-menu-btn {
-        display: block;
-      }
-      
-      .nav-links {
-        position: fixed;
-        top: 70px;
-        right: -100%;
-        flex-direction: column;
-        background: var(--primary-dark);
-        width: 80%;
-        height: calc(100vh - 70px);
-        padding: 30px;
-        transition: right 0.3s ease;
-        align-items: flex-start;
-      }
-      
-      .nav-links.active {
-        right: 0;
-      }
-      
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .step {
-        flex-direction: column;
-      }
-      
-      .step-number {
-        margin-bottom: 15px;
-        margin-right: 0;
-      }
-      
-      .step:not(:last-child)::after {
-        display: none;
-      }
-      
-      .cta-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .cta-buttons a {
-        width: 100%;
-        max-width: 300px;
-        justify-content: center;
-      }
-    }
-  </style>
-</head>
-<body>
+---
+layout: default
+title: Preboot — Build SaaS Apps Faster
+---
+<div class="container">
+  <section id="features">
+    <h2>Why Preboot?</h2>
+    <p class="section-description">Stop reimplementing the same patterns. Focus on your business logic while we take care of the infrastructure.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0A192F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <strong>Multi-Tenant Authentication</strong>
+        </div>
+        <p>Secure user management with built-in tenant isolation. Includes JWT, OAuth2 support, and role-based access control out of the box.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0A192F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              <line x1="11" y1="8" x2="11" y2="14"></line>
+              <line x1="8" y1="11" x2="14" y2="11"></line>
+            </svg>
+          </div>
+          <strong>Dynamic Data Filtering</strong>
+        </div>
+        <p>Automatic query scoping based on active tenant security context. Perfect data isolation without changing your business logic.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0A192F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 3v18h18"></path>
+              <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"></path>
+            </svg>
+          </div>
+          <strong>Observability Ready</strong>
+        </div>
+        <p>Logs, metrics, and health checks ready for production. Monitor your application with ease using standard tools and practices.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0A192F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+            </svg>
+          </div>
+          <strong>Event-Driven Architecture</strong>
+        </div>
+        <p>Built-in event bus, task queues, and message handling. Scale your application with asynchronous communication patterns.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0A192F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="3" y1="9" x2="21" y2="9"></line>
+              <line x1="3" y1="15" x2="21" y2="15"></line>
+              <line x1="9" y1="3" x2="9" y2="21"></line>
+              <line x1="15" y1="3" x2="15" y2="21"></line>
+            </svg>
+          </div>
+          <strong>CQRS & Clean Architecture</strong>
+        </div>
+        <p>Command Query Responsibility Segregation implementation with clean separation of concerns for better maintainability.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0A192F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+          </div>
+          <strong>Modular Components</strong>
+        </div>
+        <p>Pick what you need. Each feature is modular and can be used independently, while still working seamlessly together.</p>
+      </div>
+    </div>
+  </section>
+</div>
 
-<nav id="navbar">
-  <a href="#" class="nav-logo"><span>P</span>Preboot</a>
-  <div class="nav-links" id="navLinks">
-    <a href="#features">Features</a>
-    <a href="#how">How It Works</a>
-    <a href="#code">Code Examples</a>
-    <a href="#start">Get Started</a>
-          <a href="https://github.com/preboot/prebootkit" class="github-link" target="_blank">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
-          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-        </svg> GitHub
-      </a>
-  </div>
-  <button class="mobile-menu-btn" id="mobileMenuBtn">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="menu-icon">
-      <line x1="3" y1="12" x2="21" y2="12"></line>
-      <line x1="3" y1="6" x2="21" y2="6"></line>
-      <line x1="3" y1="18" x2="21" y2="18"></line>
-    </svg>
-  </button>
-</nav>
-
-<header>
-  <div class="logo"><span class="logo-icon">P</span>Preboot</div>
-  <h1>Build SaaS Apps Faster</h1>
-  <p>A comprehensive framework for Java developers building multi-tenant applications with Spring Boot</p>
-</header>
-
-<section id="features">
-  <h2>Why Preboot?</h2>
-  <p class="section-description">Stop reimplementing the same patterns. Focus on your business logic while we take care of the infrastructure.</p>
-  
-  <div class="features-grid">
-    <div class="feature-card">
-      <div class="feature-header">
-        <div class="feature-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0A192F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-            <circle cx="9" cy="7" r="4"></circle>
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-          </svg>
-        </div>
-        <strong>Multi-Tenant Authentication</strong>
-      </div>
-      <p>Secure user management with built-in tenant isolation. Includes JWT, OAuth2 support, and role-based access control out of the box.</p>
-    </div>
-    
-    <div class="feature-card">
-      <div class="feature-header">
-        <div class="feature-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0A192F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            <line x1="11" y1="8" x2="11" y2="14"></line>
-            <line x1="8" y1="11" x2="14" y2="11"></line>
-          </svg>
-        </div>
-        <strong>Dynamic Data Filtering</strong>
-      </div>
-      <p>Automatic query scoping based on active tenant security context. Perfect data isolation without changing your business logic.</p>
-    </div>
-    
-    <div class="feature-card">
-      <div class="feature-header">
-        <div class="feature-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0A192F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 3v18h18"></path>
-            <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"></path>
-          </svg>
-        </div>
-        <strong>Observability Ready</strong>
-      </div>
-      <p>Logs, metrics, and health checks ready for production. Monitor your application with ease using standard tools and practices.</p>
-    </div>
-    
-    <div class="feature-card">
-      <div class="feature-header">
-        <div class="feature-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0A192F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
-          </svg>
-        </div>
-        <strong>Event-Driven Architecture</strong>
-      </div>
-      <p>Built-in event bus, task queues, and message handling. Scale your application with asynchronous communication patterns.</p>
-    </div>
-    
-    <div class="feature-card">
-      <div class="feature-header">
-        <div class="feature-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0A192F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-            <line x1="3" y1="9" x2="21" y2="9"></line>
-            <line x1="3" y1="15" x2="21" y2="15"></line>
-            <line x1="9" y1="3" x2="9" y2="21"></line>
-            <line x1="15" y1="3" x2="15" y2="21"></line>
-          </svg>
-        </div>
-        <strong>CQRS & Clean Architecture</strong>
-      </div>
-      <p>Command Query Responsibility Segregation implementation with clean separation of concerns for better maintainability.</p>
-    </div>
-    
-    <div class="feature-card">
-      <div class="feature-header">
-        <div class="feature-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0A192F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="7" height="7"></rect>
-            <rect x="14" y="3" width="7" height="7"></rect>
-            <rect x="14" y="14" width="7" height="7"></rect>
-            <rect x="3" y="14" width="7" height="7"></rect>
-          </svg>
-        </div>
-        <strong>Modular Components</strong>
-      </div>
-      <p>Pick what you need. Each feature is modular and can be used independently, while still working seamlessly together.</p>
-    </div>
-  </div>
-</section>
-
-<section id="how" class="how-it-works">
-  <h2>How It Works</h2>
-  <p class="section-description">Getting started with Preboot is simple. Follow these steps to accelerate your SaaS development.</p>
-  
-  <div class="steps">
-    <div class="step">
-      <div class="step-number">1</div>
-      <div class="step-content">
-        <div class="step-title">Install the Dependency</div>
-        <div class="step-description">
-          Add Preboot to your Spring Boot project using Maven or Gradle. The core library is lightweight and has minimal dependencies.
+<section id="how" class="how-it-works full-width">
+  <div class="container">
+    <h2>How It Works</h2>
+    <p class="section-description">Getting started with Preboot is simple. Follow these steps to accelerate your SaaS development.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <div class="step-title">Install the Dependency</div>
+          <div class="step-description">
+            Add Preboot to your Spring Boot project using Maven or Gradle. The core library is lightweight and has minimal dependencies.
+          </div>
         </div>
       </div>
-    </div>
-    
-    <div class="step">
-      <div class="step-number">2</div>
-      <div class="step-content">
-        <div class="step-title">Configure Your Application</div>
-        <div class="step-description">
-          Use our simple builder pattern to enable the features you need. Configure multi-tenancy, authentication, and other components with minimal code.
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <div class="step-title">Configure Your Application</div>
+          <div class="step-description">
+            Use our simple builder pattern to enable the features you need. Configure multi-tenancy, authentication, and other components with minimal code.
+          </div>
         </div>
       </div>
-    </div>
-    
-    <div class="step">
-      <div class="step-number">3</div>
-      <div class="step-content">
-        <div class="step-title">Build Your Business Logic</div>
-        <div class="step-description">
-          Focus on what makes your application unique. Use our CQRS implementation to build clean, maintainable business logic without the boilerplate.
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <div class="step-title">Build Your Business Logic</div>
+          <div class="step-description">
+            Focus on what makes your application unique. Use our CQRS implementation to build clean, maintainable business logic without the boilerplate.
+          </div>
         </div>
       </div>
-    </div>
-    
-    <div class="step">
-      <div class="step-number">4</div>
-      <div class="step-content">
-        <div class="step-title">Deploy with Confidence</div>
-        <div class="step-description">
-          With built-in observability and production-ready features, your application is ready for the real world. Scale with ease as your user base grows.
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <div class="step-title">Deploy with Confidence</div>
+          <div class="step-description">
+            With built-in observability and production-ready features, your application is ready for the real world. Scale with ease as your user base grows.
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="code">
-  <h2>Code Examples</h2>
-  <p class="section-description">See how Preboot simplifies your development process with clean, intuitive APIs.</p>
-  
-  <div class="code-example">
-    <div class="code-tabs">
-      <button class="code-tab active" data-tab="config">Configuration</button>
-      <button class="code-tab" data-tab="multi-tenant">Multi-Tenancy</button>
-      <button class="code-tab" data-tab="cqrs">CQRS Pattern</button>
-    </div>
-    
-    <div class="code-panel">
-      <div class="code-content active" id="config-content">
-        <pre>@Configuration
+<div class="container">
+  <section id="code">
+    <h2>Code Examples</h2>
+    <p class="section-description">See how Preboot simplifies your development process with clean, intuitive APIs.</p>
+    <div class="code-example">
+      <div class="code-tabs">
+        <button class="code-tab active" data-tab="config">Configuration</button>
+        <button class="code-tab" data-tab="multi-tenant">Multi-Tenancy</button>
+        <button class="code-tab" data-tab="cqrs">CQRS Pattern</button>
+      </div>
+      <div class="code-panel">
+        <div class="code-content active" id="config-content">
+          <pre>@Configuration
 public class PrebootConfig {
     @Bean
     public PreBootKit preBootKit() {
@@ -799,23 +160,18 @@ public class PrebootConfig {
             .build();
     }
 }</pre>
-      </div>
-      
-      <div class="code-content" id="multi-tenant-content">
-        <pre>@RestController
+        </div>
+        <div class="code-content" id="multi-tenant-content">
+          <pre>@RestController
 @RequestMapping("/api/customers")
 public class CustomerController {
-    
     private final CustomerService customerService;
-    
     // Constructor injection...
-    
     @GetMapping
     public List&lt;CustomerDto&gt; getAllCustomers() {
         // Tenant filtering automatically applied
         return customerService.findAll();
     }
-    
     @PostMapping
     public ResponseEntity&lt;CustomerDto&gt; createCustomer(@RequestBody CreateCustomerRequest request) {
         // Customer automatically associated with current tenant
@@ -824,25 +180,21 @@ public class CustomerController {
             .body(created);
     }
 }</pre>
-      </div>
-      
-      <div class="code-content" id="cqrs-content">
-        <pre>// Command
+        </div>
+        <div class="code-content" id="cqrs-content">
+          <pre>// Command
 @Value
 public class CreateProductCommand implements Command {
     private String name;
     private String description;
     private BigDecimal price;
 }
-
 // Command Handler
 @Component
 class CreateProductCommandHandler implements CommandHandler&lt;CreateProductCommand&gt; {
     private final ProductRepository repository;
     private final EventBus eventBus;
-    
     // Constructor injection...
-    
     @Override
     public void handle(CreateProductCommand command) {
         Product product = new Product(
@@ -851,28 +203,27 @@ class CreateProductCommandHandler implements CommandHandler&lt;CreateProductComm
             command.getDescription(),
             command.getPrice()
         );
-        
         repository.save(product);
         eventBus.publish(new ProductCreatedEvent(product.getId()));
     }
 }</pre>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>
 
-<section id="start" class="cta-section">
+<section id="start" class="cta-section full-width">
   <div class="cta-content">
     <h2>Ready to Get Started?</h2>
     <p class="cta-description">Join the growing community of developers using Preboot to accelerate their SaaS development.</p>
-    
     <div class="cta-buttons">
       <a href="https://github.com/preboot/prebootkit" class="primary-btn" target="_blank">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
           <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
         </svg> View on GitHub
       </a>
-      <a href="#docs" class="secondary-btn">
+      <a href="/docs/" class="secondary-btn">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
           <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
           <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
@@ -888,131 +239,24 @@ class CreateProductCommandHandler implements CommandHandler&lt;CreateProductComm
   </div>
 </section>
 
-<footer>
-  <div class="footer-content">
-    <div class="footer-col">
-      <div class="footer-logo"><span>P</span>Preboot</div>
-      <p>Build production-ready SaaS applications faster with Java Spring Boot.</p>
-      
-      <div class="social-links">
-        <a href="https://github.com/preboot/prebootkit" target="_blank">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-          </svg>
-        </a>
-        <a href="#twitter">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
-          </svg>
-        </a>
-        <a href="#linkedin">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-            <rect x="2" y="9" width="4" height="12"></rect>
-            <circle cx="4" cy="4" r="2"></circle>
-          </svg>
-        </a>
-        <a href="#discord">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-          </svg>
-        </a>
-      </div>
-    </div>
-    
-    <div class="footer-col">
-      <h3 class="footer-heading">Product</h3>
-      <ul class="footer-links">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#how">How It Works</a></li>
-        <li><a href="#roadmap">Roadmap</a></li>
-        <li><a href="#changelog">Changelog</a></li>
-      </ul>
-    </div>
-    
-    <div class="footer-col">
-      <h3 class="footer-heading">Resources</h3>
-      <ul class="footer-links">
-        <li><a href="#docs">Documentation</a></li>
-        <li><a href="#tutorials">Tutorials</a></li>
-        <li><a href="#examples">Examples</a></li>
-        <li><a href="#faq">FAQ</a></li>
-      </ul>
-    </div>
-    
-    <div class="footer-col">
-      <h3 class="footer-heading">Community</h3>
-      <ul class="footer-links">
-        <li><a href="#github">GitHub</a></li>
-        <li><a href="#discord">Discord</a></li>
-        <li><a href="#contribute">Contribute</a></li>
-        <li><a href="#support">Support</a></li>
-      </ul>
-    </div>
-  </div>
-  
-  <div class="copyright">
-    &copy; 2025 Preboot.io — All rights reserved.
-  </div>
-</footer>
-
 <script>
-  // Sticky navbar
-  window.addEventListener('scroll', function() {
-    const navbar = document.getElementById('navbar');
-    if (window.scrollY > 50) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-  });
-  
-  // Mobile menu toggle
-  document.getElementById('mobileMenuBtn').addEventListener('click', function() {
-    document.getElementById('navLinks').classList.toggle('active');
-    
-    // Mobile menu toggle
-    document.getElementById('mobileMenuBtn').addEventListener('click', function() {
-      document.getElementById('navLinks').classList.toggle('active');
-      
-      const menuIcon = this.querySelector('.menu-icon');
-      
-      // Toggle between menu and close icon
-      if (menuIcon.innerHTML.includes('line x1="3"')) {
-        menuIcon.innerHTML = `
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        `;
-      } else {
-        menuIcon.innerHTML = `
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        `;
-      }
-    });
-  });
-  
   // Code tabs
-  const codeTabs = document.querySelectorAll('.code-tab');
-  codeTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      // Remove active class from all tabs
-      codeTabs.forEach(t => t.classList.remove('active'));
-      
-      // Add active class to clicked tab
-      tab.classList.add('active');
-      
-      // Hide all content
-      document.querySelectorAll('.code-content').forEach(content => {
-        content.classList.remove('active');
+  document.addEventListener('DOMContentLoaded', function() {
+    const codeTabs = document.querySelectorAll('.code-tab');
+    codeTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Remove active class from all tabs
+        codeTabs.forEach(t => t.classList.remove('active'));
+        // Add active class to clicked tab
+        tab.classList.add('active');
+        // Hide all content
+        document.querySelectorAll('.code-content').forEach(content => {
+          content.classList.remove('active');
+        });
+        // Show the selected content
+        const tabId = tab.getAttribute('data-tab');
+        document.getElementById(`${tabId}-content`).classList.add('active');
       });
-      
-      // Show the selected content
-      const tabId = tab.getAttribute('data-tab');
-      document.getElementById(`${tabId}-content`).classList.add('active');
     });
   });
 </script>
-</body>
-</html>

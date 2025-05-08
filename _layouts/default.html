@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }} — Build SaaS Apps Faster{% endif %}</title>
+  <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }} — Build SaaS Apps Faster{% endif %}</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="{{ '/favicon.svg' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
 </head>
 <body>
-
 <nav id="navbar">
   <a href="{{ '/' | relative_url }}" class="nav-logo"><span>P</span>Preboot</a>
   <div class="nav-links" id="navLinks">
@@ -31,7 +30,6 @@
     </svg>
   </button>
 </nav>
-
 {% if page.url == '/' %}
 <header>
   <div class="logo"><span class="logo-icon">P</span>Preboot</div>
@@ -46,17 +44,14 @@
   </div>
 </header>
 {% endif %}
-
 <main>
   {{ content }}
 </main>
-
 <footer>
   <div class="footer-content">
     <div class="footer-col">
       <div class="footer-logo"><span>P</span>Preboot</div>
       <p>Build production-ready SaaS applications faster with Java Spring Boot.</p>
-      
       <div class="social-links">
         <a href="https://github.com/preboot/prebootkit" target="_blank">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -82,7 +77,6 @@
         </a>
       </div>
     </div>
-    
     <div class="footer-col">
       <h3 class="footer-heading">Product</h3>
       <ul class="footer-links">
@@ -92,7 +86,6 @@
         <li><a href="{{ '/docs/changelog/' | relative_url }}">Changelog</a></li>
       </ul>
     </div>
-    
     <div class="footer-col">
       <h3 class="footer-heading">Resources</h3>
       <ul class="footer-links">
@@ -102,7 +95,6 @@
         <li><a href="{{ '/docs/faq/' | relative_url }}">FAQ</a></li>
       </ul>
     </div>
-    
     <div class="footer-col">
       <h3 class="footer-heading">Community</h3>
       <ul class="footer-links">
@@ -113,12 +105,10 @@
       </ul>
     </div>
   </div>
-  
   <div class="copyright">
     &copy; {% raw %}{{ site.time | date: '%Y' }}{% endraw %} Preboot.io — All rights reserved.
   </div>
 </footer>
-
 <script>
   // Sticky navbar
   window.addEventListener('scroll', function() {
@@ -129,13 +119,10 @@
       navbar.classList.remove('scrolled');
     }
   });
-  
   // Mobile menu toggle
   document.getElementById('mobileMenuBtn').addEventListener('click', function() {
     document.getElementById('navLinks').classList.toggle('active');
-    
     const menuIcon = this.querySelector('.menu-icon');
-    
     // Toggle between menu and close icon
     if (menuIcon.innerHTML.includes('line x1="3"')) {
       menuIcon.innerHTML = `
