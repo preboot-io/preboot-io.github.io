@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Preboot — Build SaaS Apps Faster
+title: PreBoot — Build SaaS Apps Faster
 ---
 <div class="container">
   <section id="features">
-    <h2>Why Preboot?</h2>
-    <p class="section-description">Stop reimplementing the same patterns. Focus on your business logic while we take care of the infrastructure.</p>
+    <h2>Why PreBoot?</h2>
+    <p class="section-description">Stop reimplementing the same patterns. Focus on your business logic while we take care of the SaaS infrastructure.</p>
     <div class="features-grid">
       <div class="feature-card">
         <div class="feature-header">
@@ -19,7 +19,7 @@ title: Preboot — Build SaaS Apps Faster
           </div>
           <strong>Multi-Tenant Authentication</strong>
         </div>
-        <p>Secure user management with built-in tenant isolation. Includes JWT, OAuth2 support, and role-based access control out of the box.</p>
+        <p>Complete multi-tenant user management with JWT support, role-based access control, and automatic tenant context - all with minimal configuration.</p>
       </div>
       <div class="feature-card">
         <div class="feature-header">
@@ -31,9 +31,9 @@ title: Preboot — Build SaaS Apps Faster
               <line x1="8" y1="11" x2="14" y2="11"></line>
             </svg>
           </div>
-          <strong>Dynamic Data Filtering</strong>
+          <strong>Secure Data Access</strong>
         </div>
-        <p>Automatic query scoping based on active tenant security context. Perfect data isolation without changing your business logic.</p>
+        <p>A simple @Tenant annotation provides automatic tenant isolation on all your queries. Build complex, type-safe dynamic queries with built-in security filtering.</p>
       </div>
       <div class="feature-card">
         <div class="feature-header">
@@ -45,7 +45,7 @@ title: Preboot — Build SaaS Apps Faster
           </div>
           <strong>Observability Ready</strong>
         </div>
-        <p>Logs, metrics, and health checks ready for production. Monitor your application with ease using standard tools and practices.</p>
+        <p>Built-in monitoring for slow method calls, detailed error tracking, and health checks. Easily identify performance bottlenecks even in development.</p>
       </div>
       <div class="feature-card">
         <div class="feature-header">
@@ -56,7 +56,7 @@ title: Preboot — Build SaaS Apps Faster
           </div>
           <strong>Event-Driven Architecture</strong>
         </div>
-        <p>Built-in event bus, task queues, and message handling. Scale your application with asynchronous communication patterns.</p>
+        <p>Complete event system with synchronous and asynchronous handling, persistent task queues with retry logic, and type-safe events for building reactive applications.</p>
       </div>
       <div class="feature-card">
         <div class="feature-header">
@@ -69,9 +69,9 @@ title: Preboot — Build SaaS Apps Faster
               <line x1="15" y1="3" x2="15" y2="21"></line>
             </svg>
           </div>
-          <strong>CQRS & Clean Architecture</strong>
+          <strong>Full-Stack SaaS Solution</strong>
         </div>
-        <p>Command Query Responsibility Segregation implementation with clean separation of concerns for better maintainability.</p>
+        <p>Backend and frontend libraries optimized for SaaS development with React components for auth flows, data tables, and form handling - all integrated with tenant context.</p>
       </div>
       <div class="feature-card">
         <div class="feature-header">
@@ -83,34 +83,33 @@ title: Preboot — Build SaaS Apps Faster
               <rect x="3" y="14" width="7" height="7"></rect>
             </svg>
           </div>
-          <strong>Modular Components</strong>
+          <strong>Modular Architecture</strong>
         </div>
-        <p>Pick what you need. Each feature is modular and can be used independently, while still working seamlessly together.</p>
+        <p>Pick and choose from modular components that work together seamlessly. Use just what you need with minimal dependencies, or adopt the entire framework for maximum productivity.</p>
       </div>
     </div>
   </section>
 </div>
-
 <section id="how" class="how-it-works full-width">
   <div class="container">
     <h2>How It Works</h2>
-    <p class="section-description">Getting started with Preboot is simple. Follow these steps to accelerate your SaaS development.</p>
+    <p class="section-description">Getting started with PreBoot is simple. Follow these steps to accelerate your SaaS development.</p>
     <div class="steps">
       <div class="step">
         <div class="step-number">1</div>
         <div class="step-content">
-          <div class="step-title">Install the Dependency</div>
+          <div class="step-title">Install the Dependencies</div>
           <div class="step-description">
-            Add Preboot to your Spring Boot project using Maven or Gradle. The core library is lightweight and has minimal dependencies.
+            Add PreBoot to your Spring Boot and React projects using Maven/Gradle and npm. Our modules are lightweight and designed to integrate with your existing technology stack.
           </div>
         </div>
       </div>
       <div class="step">
         <div class="step-number">2</div>
         <div class="step-content">
-          <div class="step-title">Configure Your Application</div>
+          <div class="step-title">Configure Multi-Tenancy</div>
           <div class="step-description">
-            Use our simple builder pattern to enable the features you need. Configure multi-tenancy, authentication, and other components with minimal code.
+            Set up tenant isolation with just a few annotations. Choose from multiple strategies like schema-per-tenant or discriminator column based on your business requirements.
           </div>
         </div>
       </div>
@@ -119,104 +118,134 @@ title: Preboot — Build SaaS Apps Faster
         <div class="step-content">
           <div class="step-title">Build Your Business Logic</div>
           <div class="step-description">
-            Focus on what makes your application unique. Use our CQRS implementation to build clean, maintainable business logic without the boilerplate.
+            Focus on what makes your application unique by creating feature-first modules. Use our security-aware repositories and UI components to build CRUD flows in minutes.
           </div>
         </div>
       </div>
       <div class="step">
         <div class="step-number">4</div>
         <div class="step-content">
-          <div class="step-title">Deploy with Confidence</div>
+          <div class="step-title">Scale With Confidence</div>
           <div class="step-description">
-            With built-in observability and production-ready features, your application is ready for the real world. Scale with ease as your user base grows.
+            As your user base grows, leverage our event system, task queues, and observability tools to maintain performance and reliability without massive architecture changes.
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<div class="container">
-  <section id="code">
-    <h2>Code Examples</h2>
-    <p class="section-description">See how Preboot simplifies your development process with clean, intuitive APIs.</p>
-    <div class="code-example">
-      <div class="code-tabs">
-        <button class="code-tab active" data-tab="config">Configuration</button>
-        <button class="code-tab" data-tab="multi-tenant">Multi-Tenancy</button>
-        <button class="code-tab" data-tab="cqrs">CQRS Pattern</button>
-      </div>
-      <div class="code-panel">
-        <div class="code-content active" id="config-content">
-          <pre>@Configuration
-public class PrebootConfig {
-    @Bean
-    public PreBootKit preBootKit() {
-        return PreBootKit.builder()
-            .withMultiTenancy()
-            .withAuthentication()
-            .withEventBus()
-            .withTaskQueue()
-            .build();
-    }
+<div class="code-example">
+  <div class="code-tabs">
+    <button class="code-tab active" data-tab="config">Entity Setup</button>
+    <button class="code-tab" data-tab="multi-tenant">Repository</button>
+    <button class="code-tab" data-tab="cqrs">Event System</button>
+  </div>
+  <div class="code-panel">
+    <div class="code-content active" id="config-content">
+      <pre>// Entity with multi-tenant support and access control
+@Table("documents")
+@SecureAccess(
+    read = @AccessRule(roles = {"VIEWER", "EDITOR", "ADMIN"}),
+    write = @AccessRule(roles = {"EDITOR", "ADMIN"})
+)
+public class Document {
+    @Id
+    private Long id;
+    
+    @Tenant  // Automatic tenant filtering
+    private UUID tenantId;
+    
+    private String title;
+    private String content;
+    private String status;
+    
+    @Column("created_at")
+    private LocalDateTime createdAt;
+    
+    @Version
+    private Long version;  // Optimistic locking
 }</pre>
-        </div>
-        <div class="code-content" id="multi-tenant-content">
-          <pre>@RestController
-@RequestMapping("/api/customers")
-public class CustomerController {
-    private final CustomerService customerService;
-    // Constructor injection...
-    @GetMapping
-    public List&lt;CustomerDto&gt; getAllCustomers() {
-        // Tenant filtering automatically applied
-        return customerService.findAll();
-    }
-    @PostMapping
-    public ResponseEntity&lt;CustomerDto&gt; createCustomer(@RequestBody CreateCustomerRequest request) {
-        // Customer automatically associated with current tenant
-        CustomerDto created = customerService.create(request);
-        return ResponseEntity.created(URI.create("/api/customers/" + created.getId()))
-            .body(created);
-    }
-}</pre>
-        </div>
-        <div class="code-content" id="cqrs-content">
-          <pre>// Command
-@Value
-public class CreateProductCommand implements Command {
-    private String name;
-    private String description;
-    private BigDecimal price;
-}
-// Command Handler
-@Component
-class CreateProductCommandHandler implements CommandHandler&lt;CreateProductCommand&gt; {
-    private final ProductRepository repository;
-    private final EventBus eventBus;
-    // Constructor injection...
-    @Override
-    public void handle(CreateProductCommand command) {
-        Product product = new Product(
-            UUID.randomUUID(),
-            command.getName(),
-            command.getDescription(),
-            command.getPrice()
-        );
-        repository.save(product);
-        eventBus.publish(new ProductCreatedEvent(product.getId()));
-    }
-}</pre>
-        </div>
-      </div>
     </div>
-  </section>
-</div>
+    <div class="code-content" id="multi-tenant-content">
+      <pre>// Secure repository interface
+public interface DocumentRepository extends SecureRepository<Document, Long> {
+    // Find methods automatically filtered by tenant
+    Optional<Document> findByTitle(String title);
+    
+    // Custom queries with automatic security
+    @Query("SELECT * FROM documents WHERE status = :status AND tenant_id = :#{currentTenant()}")
+    List<Document> findByStatus(String status);
+}
 
+// Repository implementation
+@Repository
+public class DocumentRepositoryImpl extends SecureRepositoryImpl<Document, Long> {
+    public DocumentRepositoryImpl(SecureRepositoryContext context) {
+        super(context, Document.class);
+    }
+    
+    // Dynamic filtering with automatic tenant security
+    public Page<Document> search(String titlePattern, String status) {
+        SearchParams params = SearchParams.criteria(
+            FilterCriteria.like("title", titlePattern + "%"),
+            FilterCriteria.eq("status", status)
+        )
+        .sortBy("createdAt", Sort.Direction.DESC)
+        .build();
+        
+        return findAll(params);  // Tenant filtering applied automatically
+    }
+}</pre>
+    </div>
+    <div class="code-content" id="cqrs-content">
+      <pre>// Define an event
+public record DocumentCreatedEvent(
+    UUID documentId,
+    UUID tenantId,
+    String title
+) {}
+
+// Create an event handler
+@Component
+public class DocumentEventHandler {
+    private final NotificationApi notificationApi;
+    
+    @EventHandler
+    public void handleDocumentCreated(DocumentCreatedEvent event) {
+        // Send notification email
+        EmailParam email = EmailParam.builder(
+            "docs@yourapp.com",
+            "admin@tenant.com",
+            "New Document Created",
+            "document-notification")
+            .addTemplateParam("documentId", event.documentId())
+            .addTemplateParam("title", event.title())
+            .build();
+            
+        notificationApi.sendEmail(email);
+    }
+}
+
+// Create a task for async processing
+TaskPublisher taskPublisher;
+
+@Service
+public class DocumentService {
+    // ...
+    public void processDocument(UUID documentId) {
+        // Schedule for async processing with automatic retries
+        taskPublisher.publishTask(
+            new ProcessDocumentTask(documentId)
+        );
+    }
+}</pre>
+    </div>
+  </div>
+</div>
 <section id="start" class="cta-section full-width">
   <div class="cta-content">
     <h2>Ready to Get Started?</h2>
-    <p class="cta-description">Join the growing community of developers using Preboot to accelerate their SaaS development.</p>
+    <p class="cta-description">Join the growing community of developers building SaaS applications faster with PreBoot.</p>
     <div class="cta-buttons">
       <a href="https://github.com/preboot/prebootkit" class="primary-btn" target="_blank">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
@@ -238,7 +267,6 @@ class CreateProductCommandHandler implements CommandHandler&lt;CreateProductComm
     </div>
   </div>
 </section>
-
 <script>
   // Code tabs
   document.addEventListener('DOMContentLoaded', function() {
