@@ -11,34 +11,62 @@ layout: default
         <div class="nav-section">
           <h4>Getting Started</h4>
           <ul>
-            <li><a href="{{ '/docs/' | relative_url }}" {% if page.url == '/docs/' %}class="active"{% endif %}>Introduction</a></li>
-            <li><a href="{{ '/docs/installation/' | relative_url }}" {% if page.url == '/docs/installation/' %}class="active"{% endif %}>Installation</a></li>
-            <li><a href="{{ '/docs/quick-start/' | relative_url }}" {% if page.url == '/docs/quick-start/' %}class="active"{% endif %}>Quick Start</a></li>
+            <li><a href="{{ '/docs' | relative_url }}" {% if page.url=='/docs/'
+                %}class="active" {% endif %}>Introduction</a></li>
           </ul>
         </div>
         <div class="nav-section">
-          <h4>Core Features</h4>
+          <h4>Core Concepts</h4>
           <ul>
-            <li><a href="{{ '/docs/multi-tenancy/' | relative_url }}" {% if page.url == '/docs/multi-tenancy/' %}class="active"{% endif %}>Multi-tenancy</a></li>
-            <li><a href="{{ '/docs/authentication/' | relative_url }}" {% if page.url == '/docs/authentication/' %}class="active"{% endif %}>Authentication</a></li>
-            <li><a href="{{ '/docs/event-system/' | relative_url }}" {% if page.url == '/docs/event-system/' %}class="active"{% endif %}>Event System</a></li>
-            <li><a href="{{ '/docs/cqrs/' | relative_url }}" {% if page.url == '/docs/cqrs/' %}class="active"{% endif %}>CQRS & Data Access</a></li>
+            <li><a href="{{ '/docs/concepts/multi-tenancy/' | relative_url }}" {% if
+                page.url=='/docs/concepts/multi-tenancy/' %}class="active" {% endif %}>Multi-tenancy</a></li>
+            <li><a href="{{ '/docs/concepts/event-driven-architecture/' | relative_url }}" {% if
+                page.url=='/docs/concepts/event-driven-architecture/' %}class="active" {% endif %}>Event-Driven
+                Architecture</a></li>
           </ul>
         </div>
         <div class="nav-section">
-          <h4>Advanced Topics</h4>
-          <ul>
-            <li><a href="{{ '/docs/customization/' | relative_url }}" {% if page.url == '/docs/customization/' %}class="active"{% endif %}>Customization</a></li>
-            <li><a href="{{ '/docs/scaling/' | relative_url }}" {% if page.url == '/docs/scaling/' %}class="active"{% endif %}>Scaling</a></li>
-            <li><a href="{{ '/docs/security/' | relative_url }}" {% if page.url == '/docs/security/' %}class="active"{% endif %}>Security</a></li>
-          </ul>
-        </div>
-        <div class="nav-section">
-          <h4>Reference</h4>
-          <ul>
-            <li><a href="{{ '/docs/api-reference/' | relative_url }}" {% if page.url == '/docs/api-reference/' %}class="active"{% endif %}>API Reference</a></li>
-            <li><a href="{{ '/docs/configuration/' | relative_url }}" {% if page.url == '/docs/configuration/' %}class="active"{% endif %}>Configuration</a></li>
-            <li><a href="{{ '/docs/changelog/' | relative_url }}" {% if page.url == '/docs/changelog/' %}class="active"{% endif %}>Changelog</a></li>
+          <h4>Modules</h4>
+          <ul class="module-list">
+            <li>
+              <a href="{{ '/docs/modules/authentication/' | relative_url }}" {% if page.url
+                contains '/docs/modules/authentication' %}class="active" {% endif %}>Authentication</a>
+            </li>
+            <li>
+              <p>Data Access</p>
+              <ul>
+                <li><a href="{{ '/docs/modules/query/' | relative_url }}" {% if page.url=='/docs/modules/query/'
+                    %}class="active" {% endif %}>Query & Filtering</a></li>
+                <li><a href="{{ '/docs/modules/secure-data/' | relative_url }}" {% if
+                    page.url=='/docs/modules/secure-data/' %}class="active" {% endif %}>Secure Data Access</a></li>
+              </ul>
+            </li>
+            <li>
+              <p>Event System</p>
+              <ul>
+                <li><a href="{{ '/docs/modules/eventbus-core/' | relative_url }}" {% if
+                    page.url=='/docs/modules/eventbus-core/' %}class="active" {% endif %}>Core EventBus</a></li>
+                <li><a href="{{ '/docs/modules/eventbus-tasks/' | relative_url }}" {% if
+                    page.url=='/docs/modules/eventbus-tasks/' %}class="active" {% endif %}>Persistent Tasks</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="{{ '/docs/modules/notifications/' | relative_url }}" {% if page.url
+                contains '/docs/modules/notifications' %}class="active" {% endif %}>Notifications</a>
+            </li>
+            <li>
+              <a href="{{ '/docs/modules/exporters/' | relative_url }}" {% if page.url
+                contains '/docs/modules/exporters' %}class="active" {% endif %}>Data Exporters</a>
+            </li>
+            <li>
+              <p>Utilities</p>
+              <ul>
+                <li><a href="{{ '/docs/modules/core-utils/' | relative_url }}" {% if
+                    page.url=='/docs/modules/core-utils/' %}class="active" {% endif %}>Core Utilities</a></li>
+                <li><a href="{{ '/docs/modules/observability/' | relative_url }}" {% if
+                    page.url=='/docs/modules/observability/' %}class="active" {% endif %}>Observability</a></li>
+              </ul>
+            </li>
           </ul>
         </div>
       </nav>
@@ -67,58 +95,12 @@ layout: default
       <div class="article-content">
         {{ content }}
       </div>
-      <footer class="article-footer">
-        <div class="article-meta">
-          {% if page.last_modified_at %}
-          <div class="last-updated">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-              <line x1="16" y1="2" x2="16" y2="6"></line>
-              <line x1="8" y1="2" x2="8" y2="6"></line>
-              <line x1="3" y1="10" x2="21" y2="10"></line>
-            </svg>
-            Last updated: {{ page.last_modified_at | date: '%B %d, %Y' }}
-          </div>
-          {% endif %}
-          <div class="edit-on-github">
-            <a href="{{ site.github.repository_url }}/edit/main/{{ page.path }}" target="_blank">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 20h9"></path>
-                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-              </svg>
-              Edit this page on GitHub
-            </a>
-          </div>
-        </div>
-        {% if page.previous or page.next %}
-        <div class="pagination">
-          {% if page.previous %}
-          <a href="{{ page.previous.url | relative_url }}" class="prev">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="19" y1="12" x2="5" y2="12"></line>
-              <polyline points="12 19 5 12 12 5"></polyline>
-            </svg>
-            {{ page.previous.title }}
-          </a>
-          {% endif %}
-          {% if page.next %}
-          <a href="{{ page.next.url | relative_url }}" class="next">
-            {{ page.next.title }}
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </a>
-          {% endif %}
-        </div>
-        {% endif %}
-      </footer>
     </div>
   </main>
 </div>
 <script>
   // Generate Table of Contents
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     const tocContainer = document.getElementById('toc');
     if (!tocContainer) return;
     const headings = document.querySelectorAll('.article-content h2, .article-content h3');
@@ -127,7 +109,7 @@ layout: default
       return;
     }
     const tocList = document.createElement('ul');
-    headings.forEach(function(heading, index) {
+    headings.forEach(function (heading, index) {
       // Add ID to the heading if it doesn't have one
       if (!heading.id) {
         heading.id = 'heading-' + index;
@@ -143,13 +125,13 @@ layout: default
     tocContainer.appendChild(tocList);
   });
   // Simple search
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     const searchInput = document.getElementById('doc-search');
     if (!searchInput) return;
-    searchInput.addEventListener('input', function() {
+    searchInput.addEventListener('input', function () {
       const query = this.value.toLowerCase();
       const links = document.querySelectorAll('.doc-nav a');
-      links.forEach(function(link) {
+      links.forEach(function (link) {
         const text = link.textContent.toLowerCase();
         const listItem = link.parentElement;
         if (query === '' || text.includes(query)) {

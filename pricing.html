@@ -1,0 +1,136 @@
+---
+layout: default
+title: Pricing - PreBoot
+---
+<div class="pricing-hero full-width">
+  <div class="container">
+    <h1>Transparent, Value-Based Pricing</h1>
+    <p>Choose the plan that fits your needs and scale as you grow</p>
+  </div>
+</div>
+
+<div class="container">
+  <section class="pricing-section">
+    <div class="pricing-toggle">
+      <span>Monthly</span>
+      <label class="switch">
+        <input type="checkbox" id="billingToggle">
+        <span class="slider round"></span>
+      </label>
+      <span class="annual-label">Annual <span class="save-badge">Save 20%</span></span>
+    </div>
+
+    <div class="pricing-table">
+      <div class="pricing-col">
+        <div class="pricing-header">
+          <h3>Community</h3>
+          <div class="price">Free</div>
+          <p>Open-source foundation for Java SaaS applications</p>
+        </div>
+        <div class="pricing-features">
+          <ul>
+            <li>Core multi-tenancy support</li>
+            <li>Basic JWT authentication</li>
+            <li>In-memory event system</li>
+            <li>Simple task queue</li>
+            <li>Basic UI components</li>
+            <li>Community support</li>
+          </ul>
+        </div>
+        <div class="pricing-footer">
+          <a href="https://github.com/preboot/prebootkit" class="secondary-btn" target="_blank">Get Started</a>
+        </div>
+      </div>
+
+      <div class="pricing-col highlight">
+        <div class="pricing-tag">Early Adopter</div>
+        <div class="pricing-header">
+          <h3>Professional</h3>
+          <div class="price" id="proPrice">$59/mo</div>
+          <p>Advanced features for production SaaS applications</p>
+        </div>
+        <div class="pricing-features">
+          <ul>
+            <li><strong>Everything in Community, plus:</strong></li>
+            <li>Advanced multi-tenancy strategies</li>
+            <li>Attribute-based access control</li>
+            <li>API key management</li>
+            <li>Distributed event system</li>
+            <li>White-labeling support</li>
+            <li>Premium UI components</li>
+            <li>Priority email support</li>
+            <li>80% discount on courses</li>
+          </ul>
+        </div>
+        <div class="pricing-footer">
+          <a href="/early-adopter/" class="primary-btn">Get Early Access</a>
+        </div>
+      </div>
+
+      <div class="pricing-col">
+        <div class="pricing-header">
+          <h3>Enterprise</h3>
+          <div class="price">Custom</div>
+          <p>For teams building mission-critical applications</p>
+        </div>
+        <div class="pricing-features">
+          <ul>
+            <li><strong>Everything in Professional, plus:</strong></li>
+            <li>Unlimited developers</li>
+            <li>Premium support SLA</li>
+            <li>Architecture consulting</li>
+            <li>Custom development</li>
+            <li>Dedicated Slack channel</li>
+            <li>Team training</li>
+            <li>Implementation assistance</li>
+          </ul>
+        </div>
+        <div class="pricing-footer">
+          <a href="/contact/" class="secondary-btn">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h3>What's included in the Professional Edition?</h3>
+        <p>PreBoot Pro includes advanced multi-tenancy strategies, enhanced security features, white-labeling capabilities, premium UI components, priority support, and exclusive access to premium content and courses at a significant discount.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What is the Early Adopter program?</h3>
+        <p>The Early Adopter program gives you access to PreBoot Pro at a significant discount. Early adopters also get to directly influence the roadmap, receive personalized support, and get recognized as founding community members.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can I upgrade from Community to Professional?</h3>
+        <p>Yes, you can easily upgrade from Community to Professional at any time. Your existing projects will continue to work, and you'll gain access to additional features and capabilities.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Do you offer educational discounts?</h3>
+        <p>Yes, we offer discounts for educational institutions, non-profits, and open source projects. Contact us for more information.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What payment methods do you accept?</h3>
+        <p>We accept credit cards, PayPal, and bank transfers for annual enterprise contracts.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What's the refund policy?</h3>
+        <p>We offer a 30-day money-back guarantee for Professional Edition. If you're not satisfied, contact us within 30 days for a full refund.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  document.getElementById('billingToggle').addEventListener('change', function() {
+    const priceEl = document.getElementById('proPrice');
+    if (this.checked) {
+      priceEl.textContent = '$49/mo';
+      priceEl.innerHTML += ' <span class="billed-annually">billed annually</span>';
+    } else {
+      priceEl.textContent = '$59/mo';
+    }
+  });
+</script>

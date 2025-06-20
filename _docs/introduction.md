@@ -1,10 +1,9 @@
 ---
 layout: documentation
-title: PreBoot Documentation
-subtitle: A comprehensive guide to building SaaS applications with PreBoot
+title: "Introduction"
+subtitle: "Discover what PreBoot is and how it can help you accelerate SaaS application development."
 permalink: /docs/
 ---
-
 # Introduction to PreBoot
 
 Welcome to the official documentation for PreBoot, a comprehensive framework for Java developers building SaaS applications. This guide will help you get started with PreBoot and explore its features in depth.
@@ -41,10 +40,11 @@ PreBoot is available in two editions:
 The Community Edition is open-source and free to use. It includes:
 
 - Core backend components
-- Basic multi-tenancy
+- Multi-tenancy with tenant management, account activations, session fingerpringint, etc.
 - JWT authentication
 - Basic event bus
 - Essential frontend components
+- Files upload handling
 
 ### Professional Edition (Paid)
 
@@ -54,14 +54,13 @@ The Professional Edition adds advanced features for production SaaS applications
 - Enhanced security (ABAC, API keys)
 - Distributed event system
 - Premium UI components
-- White-labeling
 - Priority support
 
 ## Getting Started
 
 Ready to start building with PreBoot? Follow these steps:
 
-1. **Installation**: Add PreBoot to your Spring Boot project
+1. **Installation**: Use RefApp to kickstart your project
 2. **Configuration**: Set up the core components
 3. **Build**: Focus on your unique business logic
 
@@ -71,9 +70,8 @@ Check out the [Quick Start Guide](/docs/quick-start/) to get up and running in m
 
 PreBoot is backed by an active community of developers:
 
-- **GitHub**: Explore the [source code](https://github.com/preboot/prebootkit)
+- **GitHub**: Explore the source code [PreBoot Community](https://github.com/preboot-io/preboot-community), [PreBoot UI Community](https://github.com/preboot-io/preboot-ui-community), [PreBoot RefApp](https://github.com/preboot-io/preboot-refapp)
 - **Discord**: Join our community for discussions and support
-- **Twitter**: Follow us for updates and tips
 - **Blog**: Read our articles on SaaS development
 
 If you encounter any issues or have questions, please don't hesitate to reach out through one of these channels.
@@ -85,8 +83,6 @@ PreBoot is an open-source project, and we welcome contributions from the communi
 See the [Contributing Guide](/docs/contributing/) to learn how you can get involved.
 
 ## Next Steps
-
-- [Installation](/docs/installation/)
 - [Quick Start Guide](/docs/quick-start/)
 - [Core Concepts](/docs/core-concepts/)
 - [Multi-tenancy](/docs/multi-tenancy/)
