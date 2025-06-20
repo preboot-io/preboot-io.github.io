@@ -110,20 +110,28 @@
     opacity: 0.9;
     color: var(--accent);
   }
-  /* Article */
-  .article-header {
-    margin-bottom: 30px;
-  }
-  .article-header h1 {
-    font-size: 2.2rem;
-    margin: 0 0 15px;
-    color: var(--primary-dark);
-  }
-  .article-header .subtitle {
-    font-size: 1.1rem;
-    color: #4b5563;
-    margin: 0;
-  }
+  /* Kontener nagłówka - dodajemy trochę przestrzeni i linię oddzielającą */
+.article-header {
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #49483e; /* Linia w kolorze pasującym do tła bloku kodu */
+}
+
+/* Główny tytuł (H1) */
+.article-header h1 {
+  color: #f0f0f0; /* Ustawiamy bardzo jasny, prawie biały kolor */
+  font-size: 2.2rem; /* Opcjonalnie: Możesz dostosować rozmiar */
+  margin-bottom: 0.5rem;
+}
+
+/* Podtytuł (paragraf z klasą .subtitle) */
+.article-header .subtitle {
+  color: #a9b7c6; /* Jaśniejszy, czytelny szaro-niebieski kolor */
+  font-size: 1.1rem;
+  font-weight: 300; /* Lekka czcionka, aby nie konkurowała z tytułem */
+  line-height: 1.6;
+  margin-top: 0;
+}
   /* Table of Contents */
   .table-of-contents {
     background: #f9fafb;
