@@ -2,7 +2,8 @@
 layout: documentation
 title: "Query & Filtering"
 subtitle: "Dynamic filtering, sorting, and pagination with Spring Data JDBC using the preboot-query module."
-permalink: /docs/modules/query/
+permalink: /docs/backend/modules/query/
+section: backend
 ---
 # Spring Data JDBC Filterable Repository
 

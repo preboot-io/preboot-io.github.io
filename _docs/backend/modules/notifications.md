@@ -2,7 +2,8 @@
 layout: documentation
 title: "Sending Notifications"
 subtitle: "A unified interface for sending email and WebSocket notifications with template support."
-permalink: /docs/modules/notifications/
+permalink: /docs/backend/modules/notifications/
+section: backend
 ---
 # preboot-notifications
 

@@ -4,3 +4,9 @@ vendor/
 repomix-output.txt
 Gemfile.lock
 _site/
+/.mcp.json
+/CLAUDE.md
+.idea/
+/.claude/
+/strategy/
+/.playwright-mcp/

@@ -2,7 +2,8 @@
 layout: documentation
 title: "Core EventBus"
 subtitle: "A lightweight, in-memory event bus for synchronous and asynchronous communication."
-permalink: /docs/modules/eventbus-core/
+permalink: /docs/backend/modules/eventbus-core/
+section: backend
 ---
 # preboot-eventbus-core
 

@@ -10,6 +10,15 @@ author:
   name: PreBoot Team
   email: info@preboot.io
 
+# Versioning
+preboot:
+  version: "1.0.3"
+  versions:
+    - name: "latest"
+      label: "Latest (1.0.3)"
+      version: "1.0.3"
+      default: true
+
 # Ustawienia GitHub Pages
 github:
   is_project_page: true

@@ -2,7 +2,8 @@
 layout: documentation
 title: "Event-Driven Architecture"
 subtitle: "Learn how PreBoot leverages events for building loosely coupled and scalable systems."
-permalink: /docs/concepts/event-driven-architecture/
+permalink: /docs/backend/concepts/event-driven-architecture/
+section: backend
 ---
 ## Overview
 

@@ -4,75 +4,69 @@ layout: default
 <div class="documentation-container">
   <aside class="sidebar">
     <div class="sidebar-inner">
+      <div class="version-selector">
+        <label for="version-select">Version:</label>
+        <select id="version-select" onchange="switchVersion(this.value)">
+          {% for version in site.preboot.versions %}
+          <option value="{{ version.name }}" {% if page.version == version.name %}selected{% elsif page.version == nil and version.default %}selected{% endif %}>{{ version.label }}</option>
+          {% endfor %}
+        </select>
+        <div class="current-version">
+          <span class="version-badge">PreBoot {{ site.preboot.version }}</span>
+        </div>
+      </div>
       <div class="search-box">
         <input type="text" id="doc-search" placeholder="Search docs...">
       </div>
-      <nav class="doc-nav">
-        <div class="nav-section">
-          <h4>Getting Started</h4>
-          <ul>
-            <li><a href="{{ '/docs' | relative_url }}" {% if page.url=='/docs/'
-                %}class="active" {% endif %}>Introduction</a></li>
-          </ul>
-        </div>
-        <div class="nav-section">
-          <h4>Core Concepts</h4>
-          <ul>
-            <li><a href="{{ '/docs/concepts/multi-tenancy/' | relative_url }}" {% if
-                page.url=='/docs/concepts/multi-tenancy/' %}class="active" {% endif %}>Multi-tenancy</a></li>
-            <li><a href="{{ '/docs/concepts/event-driven-architecture/' | relative_url }}" {% if
-                page.url=='/docs/concepts/event-driven-architecture/' %}class="active" {% endif %}>Event-Driven
-                Architecture</a></li>
-          </ul>
-        </div>
-        <div class="nav-section">
-          <h4>Modules</h4>
-          <ul class="module-list">
-            <li>
-              <a href="{{ '/docs/modules/authentication/' | relative_url }}" {% if page.url
-                contains '/docs/modules/authentication' %}class="active" {% endif %}>Authentication</a>
-            </li>
-            <li>
-              <p>Data Access</p>
-              <ul>
-                <li><a href="{{ '/docs/modules/query/' | relative_url }}" {% if page.url=='/docs/modules/query/'
-                    %}class="active" {% endif %}>Query & Filtering</a></li>
-                <li><a href="{{ '/docs/modules/secure-data/' | relative_url }}" {% if
-                    page.url=='/docs/modules/secure-data/' %}class="active" {% endif %}>Secure Data Access</a></li>
+      <nav class="docs-nav">
+        {% assign nav_data = site.data.navigation %}
+        {% if page.version %}
+          {% assign nav_file = 'navigation-' | append: page.version %}
+          {% assign nav_data = site.data[nav_file] %}
+        {% endif %}
+        {% for section in nav_data.docs %}
+          <div class="nav-section" data-section="{{ section.section }}">
+            <h3 class="nav-section-title">{{ section.title }}</h3>
+            {% if section.description %}
+              <p class="nav-section-description">{{ section.description }}</p>
+            {% endif %}
+            {% if section.subsections %}
+              {% for subsection in section.subsections %}
+                <div class="nav-subsection">
+                  <h4 class="nav-subsection-title">{{ subsection.title }}</h4>
+                  {% if subsection.description %}
+                    <p class="nav-subsection-description">{{ subsection.description }}</p>
+                  {% endif %}
+                  <ul class="nav-list">
+                    {% for item in subsection.children %}
+                      <li class="nav-item">
+                        <a href="{{ item.url }}" 
+                           class="nav-link {% if page.url == item.url %}active{% endif %}">
+                          {{ item.title }}
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% endfor %}
+            {% else %}
+              <ul class="nav-list">
+                {% for item in section.children %}
+                  <li class="nav-item">
+                    <a href="{{ item.url }}" 
+                       class="nav-link {% if page.url == item.url %}active{% endif %}">
+                      {{ item.title }}
+                    </a>
+                  </li>
+                {% endfor %}
               </ul>
-            </li>
-            <li>
-              <p>Event System</p>
-              <ul>
-                <li><a href="{{ '/docs/modules/eventbus-core/' | relative_url }}" {% if
-                    page.url=='/docs/modules/eventbus-core/' %}class="active" {% endif %}>Core EventBus</a></li>
-                <li><a href="{{ '/docs/modules/eventbus-tasks/' | relative_url }}" {% if
-                    page.url=='/docs/modules/eventbus-tasks/' %}class="active" {% endif %}>Persistent Tasks</a></li>
-              </ul>
-            </li>
-            <li>
-              <a href="{{ '/docs/modules/notifications/' | relative_url }}" {% if page.url
-                contains '/docs/modules/notifications' %}class="active" {% endif %}>Notifications</a>
-            </li>
-            <li>
-              <a href="{{ '/docs/modules/exporters/' | relative_url }}" {% if page.url
-                contains '/docs/modules/exporters' %}class="active" {% endif %}>Data Exporters</a>
-            </li>
-            <li>
-              <p>Utilities</p>
-              <ul>
-                <li><a href="{{ '/docs/modules/core-utils/' | relative_url }}" {% if
-                    page.url=='/docs/modules/core-utils/' %}class="active" {% endif %}>Core Utilities</a></li>
-                <li><a href="{{ '/docs/modules/observability/' | relative_url }}" {% if
-                    page.url=='/docs/modules/observability/' %}class="active" {% endif %}>Observability</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
+            {% endif %}
+          </div>
+        {% endfor %}
       </nav>
     </div>
   </aside>
-  <main class="content">
+  <main class="content" {% if page.section %}data-section="{{ page.section }}"{% endif %}>
     {% if page.title == "PreBoot Documentation" %}
     <div class="documentation-banner">
       <h1>PreBoot Documentation</h1>
@@ -82,6 +76,17 @@ layout: default
     <div class="content-inner">
       {% if page.title != "PreBoot Documentation" %}
       <header class="article-header">
+        {% if page.section %}
+        <div class="section-badge {{ page.section }}">
+          {% case page.section %}
+            {% when 'getting-started' %}🚀 Getting Started
+            {% when 'backend' %}⚙️ Backend
+            {% when 'frontend' %}🎨 Frontend
+            {% when 'reference-app' %}📱 Reference App
+            {% else %}{{ page.section }}
+          {% endcase %}
+        </div>
+        {% endif %}
         <h1>{{ page.title }}</h1>
         {% if page.subtitle %}<p class="subtitle">{{ page.subtitle }}</p>{% endif %}
       </header>
@@ -130,16 +135,99 @@ layout: default
     if (!searchInput) return;
     searchInput.addEventListener('input', function () {
       const query = this.value.toLowerCase();
-      const links = document.querySelectorAll('.doc-nav a');
+      const links = document.querySelectorAll('.docs-nav .nav-link');
+      const sections = document.querySelectorAll('.docs-nav .nav-section');
+      
       links.forEach(function (link) {
         const text = link.textContent.toLowerCase();
         const listItem = link.parentElement;
+        const section = link.closest('.nav-section');
+        
         if (query === '' || text.includes(query)) {
           listItem.style.display = '';
+          // Show section if at least one item matches
+          if (section) {
+            section.style.display = '';
+          }
         } else {
           listItem.style.display = 'none';
         }
       });
+      
+      // Hide sections with no visible items
+      sections.forEach(function(section) {
+        const visibleItems = section.querySelectorAll('.nav-item:not([style*="display: none"])');
+        if (visibleItems.length === 0 && query !== '') {
+          section.style.display = 'none';
+        }
+      });
     });
   });
+</script>
+<script>
+  // Add class to body for documentation-specific styles
+  document.addEventListener('DOMContentLoaded', function() {
+    document.body.classList.add('documentation-page');
+  });
+
+  // Preserve sidebar scroll position across navigation
+  document.addEventListener('DOMContentLoaded', function() {
+    const sidebar = document.querySelector('.sidebar');
+    const navLinks = document.querySelectorAll('.docs-nav .nav-link');
+    
+    if (!sidebar) return;
+
+    // Restore scroll position on page load
+    const savedScrollTop = sessionStorage.getItem('docs-sidebar-scroll');
+    if (savedScrollTop) {
+      sidebar.scrollTop = parseInt(savedScrollTop, 10);
+    }
+
+    // Save scroll position when clicking navigation links
+    navLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        sessionStorage.setItem('docs-sidebar-scroll', sidebar.scrollTop);
+      });
+    });
+
+    // Also save on scroll to handle any manual scrolling
+    let scrollTimeout;
+    sidebar.addEventListener('scroll', function() {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(function() {
+        sessionStorage.setItem('docs-sidebar-scroll', sidebar.scrollTop);
+      }, 100);
+    });
+  });
+
+  // Version switching functionality
+  function switchVersion(version) {
+    const currentPath = window.location.pathname;
+    let newPath;
+    
+    if (version === 'latest') {
+      // For 'latest', use current structure (no version in path)
+      if (currentPath.includes('/docs/v')) {
+        // Remove version from path for latest
+        newPath = currentPath.replace(/\/docs\/v[\d.]+\//, '/docs/');
+      } else {
+        // Already on latest structure
+        newPath = currentPath;
+      }
+    } else {
+      // For specific versions, add version to path
+      if (currentPath.includes('/docs/v')) {
+        // Replace existing version
+        newPath = currentPath.replace(/\/docs\/v[\d.]+\//, `/docs/${version}/`);
+      } else if (currentPath.startsWith('/docs/')) {
+        // Add version to current path
+        newPath = currentPath.replace('/docs/', `/docs/${version}/`);
+      } else {
+        // Default to docs root for the version
+        newPath = `/docs/${version}/`;
+      }
+    }
+    
+    window.location.href = newPath;
+  }
 </script>

@@ -2,7 +2,8 @@
 layout: documentation
 title: "Multi-tenancy"
 subtitle: "Understanding the core multi-tenancy architecture in PreBoot."
-permalink: /docs/concepts/multi-tenancy/
+permalink: /docs/backend/concepts/multi-tenancy/
+section: backend
 ---
 
 ## Overview
@@ -136,4 +137,16 @@ Multi-tenancy in PreBoot is a first-class citizen, not an afterthought. The comb
 
 By using `SecureRepository` for your entities, you get enterprise-grade data isolation out of the box, allowing you to focus on writing business logic.
 
-```
+## Related Documentation
+
+### Frontend Integration
+- [Frontend Getting Started](/docs/frontend/getting-started/) - Learn how to handle multi-tenancy in React components
+- [useAuth Hook](/docs/frontend/hooks/use-auth/) - Access current tenant information in your UI
+
+### Complete Example
+- [Reference App Architecture](/docs/reference-app/architecture/) - See multi-tenancy patterns in action
+- [Reference App Overview](/docs/reference-app/overview/) - Complete multi-tenant application example
+
+### Related Backend Modules
+- [Authentication Module](/docs/backend/modules/authentication/) - User and tenant authentication
+- [Secure Data Module](/docs/backend/modules/secure-data/) - Automatic tenant filtering

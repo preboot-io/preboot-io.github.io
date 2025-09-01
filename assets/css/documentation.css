@@ -13,15 +13,66 @@
     background-color: var(--primary-dark);
     color: var(--text-light);
     flex-shrink: 0;
-    position: relative;
-    z-index: 10;
     overflow-y: auto;
     border-right: 1px solid rgba(255, 255, 255, 0.05);
     margin: 0;
     padding: 0;
+    position: fixed;
+    top: 80px; /* Position below navbar */
+    left: 0;
+    height: calc(100vh - 80px);
+    z-index: 10;
   }
   .sidebar-inner {
     padding: 30px 20px;
+  }
+  .version-selector {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .version-selector label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+  .version-selector select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-light);
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  .version-selector select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(100, 255, 218, 0.2);
+  }
+  .version-selector select option {
+    background-color: var(--primary-dark);
+    color: var(--text-light);
+  }
+  .current-version {
+    margin-top: 10px;
+    text-align: center;
+  }
+  .version-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    background-color: rgba(100, 255, 218, 0.1);
+    color: var(--accent);
+    border: 1px solid rgba(100, 255, 218, 0.3);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
   }
   .search-box {
     margin-bottom: 25px;
@@ -39,52 +90,144 @@
   .search-box input::placeholder {
     color: rgba(255, 255, 255, 0.6);
   }
-  .doc-nav {
+  .docs-nav {
     margin-bottom: 30px;
     position: relative;
   }
   .nav-section {
-    margin-bottom: 25px;
+    margin-bottom: 30px;
   }
-  .nav-section h4 {
-    font-size: 0.8rem;
-    margin: 0 0 10px;
+  .nav-section-title {
+    font-size: 0.85rem;
+    margin: 0 0 8px;
     color: var(--accent);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
-  .nav-section ul {
+  .nav-section-description {
+    font-size: 0.75rem;
+    margin: 0 0 15px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.4;
+    font-style: italic;
+  }
+  .nav-list {
     list-style: none;
     padding: 0;
     margin: 0;
   }
-  .nav-section li {
+  .nav-item {
     margin-bottom: 2px;
   }
-  .nav-section a {
+  .nav-link {
     display: block;
-    padding: 6px 10px;
-    border-radius: 4px;
+    padding: 8px 12px;
+    border-radius: 6px;
     color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     transition: all 0.2s ease;
+    border-left: 2px solid transparent;
   }
-  .nav-section a:hover {
-    background: rgba(255, 255, 255, 0.1);
+  .nav-link:hover {
+    background: rgba(255, 255, 255, 0.08);
     color: var(--text-light);
+    border-left-color: rgba(100, 255, 218, 0.3);
   }
-  .nav-section a.active {
+  .nav-link.active {
     background: rgba(100, 255, 218, 0.15);
     color: var(--accent);
     font-weight: 500;
+    border-left-color: var(--accent);
+  }
+  
+  /* Section-specific navigation styling */
+  .nav-section[data-section="getting-started"] .nav-section-title::before {
+    content: "🚀";
+    margin-right: 8px;
+  }
+  .nav-section[data-section="backend"] .nav-section-title::before {
+    content: "⚙️";
+    margin-right: 8px;
+  }
+  .nav-section[data-section="frontend"] .nav-section-title::before {
+    content: "🎨";
+    margin-right: 8px;
+  }
+  .nav-section[data-section="reference-app"] .nav-section-title::before {
+    content: "📱";
+    margin-right: 8px;
+  }
+  
+  /* Enhanced content area styling for different sections */
+  
+  /* Section-specific content styling - removed backgrounds to not override dark theme */
+  .content[data-section="getting-started"] .article-header {
+    border-left: 4px solid #22c55e;
+    padding-left: 20px;
+  }
+  
+  .content[data-section="backend"] .article-header {
+    border-left: 4px solid #3b82f6;
+    padding-left: 20px;
+  }
+  
+  .content[data-section="frontend"] .article-header {
+    border-left: 4px solid #8b5cf6;
+    padding-left: 20px;
+  }
+  
+  .content[data-section="reference-app"] .article-header {
+    border-left: 4px solid #f59e0b;
+    padding-left: 20px;
+  }
+  
+  /* Section badges for article headers */
+  .section-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--text-light);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .section-badge.getting-started {
+    background: rgba(100, 255, 218, 0.2);
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  
+  .section-badge.backend {
+    background: rgba(59, 130, 246, 0.2);
+    color: #93c5fd;
+    border-color: #93c5fd;
+  }
+  
+  .section-badge.frontend {
+    background: rgba(139, 92, 246, 0.2);
+    color: #c4b5fd;
+    border-color: #c4b5fd;
+  }
+  
+  .section-badge.reference-app {
+    background: rgba(245, 158, 11, 0.2);
+    color: #fcd34d;
+    border-color: #fcd34d;
   }
   /* Content */
   .content {
     flex: 1;
     background-color: #fff;
-    width: calc(100% - 280px); /* Same as sidebar width */
+    min-width: 0; /* Prevent flex item from overflowing */
+    overflow-x: hidden;
+    margin-left: 280px; /* Account for fixed sidebar width */
   }
   .content-inner {
     padding: 40px;
@@ -112,23 +255,27 @@
   }
   /* Kontener nagłówka - dodajemy trochę przestrzeni i linię oddzielającą */
 .article-header {
-  padding-bottom: 1.5rem;
-  margin-bottom: 2rem;
-  border-bottom: 1px solid #49483e; /* Linia w kolorze pasującym do tła bloku kodu */
+  background: #0A192F; /* Fallback solid color */
+  background: linear-gradient(135deg, #0A192F, #112240);
+  padding: 2rem 2.5rem;
+  margin: 0 0 2rem 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Główny tytuł (H1) */
 .article-header h1 {
-  color: #f0f0f0; /* Ustawiamy bardzo jasny, prawie biały kolor */
-  font-size: 2.2rem; /* Opcjonalnie: Możesz dostosować rozmiar */
+  color: var(--text-light); /* White text for dark background */
+  font-size: 2.2rem;
   margin-bottom: 0.5rem;
+  font-weight: 600;
 }
 
 /* Podtytuł (paragraf z klasą .subtitle) */
 .article-header .subtitle {
-  color: #a9b7c6; /* Jaśniejszy, czytelny szaro-niebieski kolor */
+  color: var(--accent); /* Accent color for subtitle */
   font-size: 1.1rem;
-  font-weight: 300; /* Lekka czcionka, aby nie konkurowała z tytułem */
+  font-weight: 400;
   line-height: 1.6;
   margin-top: 0;
 }
@@ -375,6 +522,8 @@
     }
     .sidebar {
       width: 100%;
+      position: relative;
+      height: auto;
     }
     .content {
       width: 100%;
@@ -397,5 +546,40 @@
     
     .pagination a {
       max-width: 100%;
+    }
+  }
+
+  /* Footer adjustment for documentation pages with fixed sidebar */
+  body.documentation-page footer {
+    margin-left: 280px; /* Account for fixed sidebar width */
+    width: calc(100% - 280px); /* Adjust width to fit remaining space */
+    overflow-x: auto; /* Allow horizontal scroll if needed */
+  }
+
+  /* Footer responsive adjustments */
+  @media (max-width: 1400px) {
+    body.documentation-page footer .footer-content {
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+    
+    body.documentation-page footer .footer-col {
+      flex: 1 1 45%; /* Two columns layout */
+      min-width: 200px;
+    }
+  }
+
+  /* Reset footer for tablets and mobile */
+  @media (max-width: 1024px) {
+    body.documentation-page footer {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+  
+  /* Single column footer on small screens */
+  @media (max-width: 768px) {
+    body.documentation-page footer .footer-col {
+      flex: 1 1 100%; /* Single column layout */
     }
   }
