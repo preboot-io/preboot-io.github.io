@@ -2,7 +2,8 @@
 layout: documentation
 title: "Secure Data Access"
 subtitle: "Multi-tenant data isolation and RBAC for repositories with the preboot-securedata module."
-permalink: /docs/modules/secure-data/
+permalink: /docs/backend/modules/secure-data/
+section: backend
 ---
 # Secure Data Module
 

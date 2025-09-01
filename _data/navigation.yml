@@ -1,0 +1,70 @@
+docs:
+  - title: "Getting Started"
+    description: "Overview of all PreBoot components"
+    section: "getting-started"
+    children:
+      - title: "Introduction"
+        url: /docs/
+      - title: "Quick Start"
+        url: /docs/getting-started/quick-start/
+
+  - title: "Backend (Core)"
+    description: "Spring Boot modules and services"
+    section: "backend"
+    subsections:
+      - title: "Concepts"
+        description: "Core architectural patterns"
+        children:
+          - title: "Multi-tenancy"
+            url: /docs/backend/concepts/multi-tenancy/
+          - title: "Event-Driven Architecture"
+            url: /docs/backend/concepts/event-driven-architecture/
+      - title: "Modules"
+        description: "Pre-built Spring Boot modules"
+        children:
+          - title: "Authentication"
+            url: /docs/backend/modules/authentication/
+          - title: "Core Utils"
+            url: /docs/backend/modules/core-utils/
+          - title: "EventBus Core"
+            url: /docs/backend/modules/eventbus-core/
+          - title: "EventBus Tasks"
+            url: /docs/backend/modules/eventbus-tasks/
+          - title: "Exporters"
+            url: /docs/backend/modules/exporters/
+          - title: "Notifications"
+            url: /docs/backend/modules/notifications/
+          - title: "Observability"
+            url: /docs/backend/modules/observability/
+          - title: "Query"
+            url: /docs/backend/modules/query/
+          - title: "Secure Data"
+            url: /docs/backend/modules/secure-data/
+
+  - title: "Frontend (UI)"
+    description: "React components and hooks"
+    section: "frontend"
+    children:
+      - title: "Getting Started"
+        url: /docs/frontend/getting-started/
+      - title: "Authentication Components"
+        url: /docs/frontend/components/authentication/
+      - title: "Data Tables"
+        url: /docs/frontend/components/data-tables/
+      - title: "useAuth Hook"
+        url: /docs/frontend/hooks/use-auth/
+
+  - title: "Reference App"
+    description: "Complete integration example"
+    section: "reference-app"
+    children:
+      - title: "Overview"
+        url: /docs/reference-app/overview/
+      - title: "Quick Start"
+        url: /docs/reference-app/quick-start/
+      - title: "Architecture"
+        url: /docs/reference-app/architecture/
+      - title: "Authentication Flow"
+        url: /docs/reference-app/authentication-flow/
+      - title: "Customization"
+        url: /docs/reference-app/customization/

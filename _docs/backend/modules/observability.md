@@ -2,7 +2,8 @@
 layout: documentation
 title: "Observability"
 subtitle: "Utilities for monitoring application performance, such as the @WarnOnSlowCall aspect."
-permalink: /docs/modules/observability/
+permalink: /docs/backend/modules/observability/
+section: backend
 ---
 # Slow Call Warning Documentation
 

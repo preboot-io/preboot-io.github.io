@@ -2,7 +2,8 @@
 layout: documentation
 title: "Exporting Data"
 subtitle: "A flexible framework for exporting data to various formats like Excel (XLSX)."
-permalink: /docs/modules/exporters/
+permalink: /docs/backend/modules/exporters/
+section: backend
 ---
 # PreBoot-Exporters Module
 

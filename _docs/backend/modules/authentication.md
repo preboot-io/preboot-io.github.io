@@ -2,7 +2,8 @@
 layout: documentation
 title: "Authentication & RBAC"
 subtitle: "JWT-based authentication, multi-tenancy, and role-based access control with the preboot-auth module."
-permalink: /docs/modules/authentication/
+permalink: /docs/backend/modules/authentication/
+section: backend
 ---
 # PreBoot Auth Module Documentation
 
@@ -1065,3 +1066,13 @@ Enable with `@EnableScheduling`.
 4.  **Password Policies**: Enforce strong passwords client-side.
 5.  **Updates**: Keep `preboot-auth` and dependencies updated.
 6.  **Change Super Admin Password**: **Immediately change default `super-admin` password.**
+
+## Related Documentation
+
+### Frontend Integration
+- [Authentication Components](/docs/frontend/components/authentication/) - Ready-to-use login and registration forms
+- [useAuth Hook](/docs/frontend/hooks/use-auth/) - React hook for authentication state management
+
+### Complete Example
+- [Reference App Authentication Flow](/docs/reference-app/authentication-flow/) - End-to-end authentication implementation
+- [Reference App Overview](/docs/reference-app/overview/) - See authentication in a complete application

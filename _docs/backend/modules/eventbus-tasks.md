@@ -2,7 +2,8 @@
 layout: documentation
 title: "Persistent Tasks"
 subtitle: "A database-backed, reliable task execution system with retry and dead-letter queue support."
-permalink: /docs/modules/eventbus-tasks/
+permalink: /docs/backend/modules/eventbus-tasks/
+section: backend
 ---
 # preboot-eventbus-tasks
 

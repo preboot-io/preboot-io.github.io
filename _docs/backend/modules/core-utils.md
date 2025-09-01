@@ -2,7 +2,8 @@
 layout: documentation
 title: "Core Utilities"
 subtitle: "Essential utilities and tools for Spring Boot applications, including TTL collections and JSON helpers."
-permalink: /docs/modules/core-utils/
+permalink: /docs/backend/modules/core-utils/
+section: backend
 ---
 # PreBoot Core
 
