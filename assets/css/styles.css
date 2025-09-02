@@ -2686,6 +2686,14 @@ div.highlight td {
 .hero-badge-icon {
   font-size: 1.1rem;
 }
+.hero-badge a {
+  color: rgba(255, 255, 255, 0.95);
+  text-decoration: none;
+  transition: text-decoration 0.2s ease;
+}
+.hero-badge a:hover {
+  text-decoration: underline;
+}
 
 .hero-highlight {
   background: linear-gradient(135deg, var(--accent) 0%, #52e0c4 100%);
