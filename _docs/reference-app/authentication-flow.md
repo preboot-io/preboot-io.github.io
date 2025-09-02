@@ -12,11 +12,36 @@ This document walks through the complete authentication flow in the PreBoot Refe
 
 ## Flow Overview
 
-```
-Registration → Email Verification → Login → JWT Token → API Access
-     ↓              ↓                ↓         ↓          ↓
-  New User    →  Activation   →   Session  →  Auth   →  Resources
-   Created       Email Sent      Started    Header     Available
+```mermaid
+flowchart LR
+    A[User Registration] --> B[Email Verification]
+    B --> C[Account Activation]
+    C --> D[User Login]
+    D --> E[JWT Token Generated]
+    E --> F[API Access]
+    
+    subgraph reg [Registration Phase]
+        A
+        B
+    end
+    
+    subgraph auth [Authentication Phase]
+        C
+        D
+    end
+    
+    subgraph access [Access Phase]
+        E
+        F
+    end
+    
+    classDef regPhase fill:#e8f5e8,stroke:#4caf50,stroke-width:2px
+    classDef authPhase fill:#e3f2fd,stroke:#2196f3,stroke-width:2px  
+    classDef accessPhase fill:#fff3e0,stroke:#ff9800,stroke-width:2px
+    
+    class A,B regPhase
+    class C,D authPhase
+    class E,F accessPhase
 ```
 
 ## 1. User Registration
