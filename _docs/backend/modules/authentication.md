@@ -365,7 +365,7 @@ The system is designed with a multi-tenant architecture:
 
 #### Tenant Operations (for Authenticated Users)
 
-```http
+```bash
 # Get My Tenants: Retrieve the list of tenants the current user belongs to.
 GET /api/auth/my-tenants
 Authorization: Bearer <jwt-token>

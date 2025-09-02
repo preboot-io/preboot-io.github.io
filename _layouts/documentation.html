@@ -230,4 +230,68 @@ layout: default
     
     window.location.href = newPath;
   }
+
+  // Initialize Mermaid diagrams
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof mermaid !== 'undefined') {
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: 'base',
+        themeVariables: {
+          // Professional color scheme
+          primaryColor: '#f8fafc',
+          primaryTextColor: '#1e293b',
+          primaryBorderColor: '#3b82f6',
+          lineColor: '#64748b',
+          secondaryColor: '#e2e8f0',
+          tertiaryColor: '#f1f5f9',
+          
+          // Subgraph styling
+          clusterBkg: '#f8fafc',
+          clusterBorder: '#3b82f6',
+          
+          // Node styling
+          nodeBorder: '#3b82f6',
+          mainBkg: '#ffffff',
+          secondBkg: '#f1f5f9',
+          tertiaryBkg: '#e2e8f0',
+          
+          // Font styling
+          fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+          fontSize: '14px'
+        },
+        flowchart: {
+          useMaxWidth: true,
+          htmlLabels: true,
+          curve: 'basis',
+          padding: 20
+        },
+        sequence: {
+          diagramMarginX: 50,
+          diagramMarginY: 10,
+          boxTextMargin: 5,
+          noteMargin: 10,
+          messageMargin: 35
+        }
+      });
+      
+      // Find and convert mermaid code blocks
+      const mermaidBlocks = document.querySelectorAll('pre code.language-mermaid');
+      mermaidBlocks.forEach(function(block, index) {
+        const mermaidCode = block.textContent;
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidCode;
+        mermaidDiv.id = 'mermaid-' + index;
+        
+        // Replace the code block with the mermaid div
+        block.parentElement.parentElement.replaceChild(mermaidDiv, block.parentElement);
+      });
+      
+      // Render all mermaid diagrams
+      mermaid.init();
+    }
+  });
 </script>
+<!-- Mermaid.js for diagrams -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js"></script>
